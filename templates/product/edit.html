@@ -1,0 +1,35 @@
+{% extends 'launching.html' %}
+{% block body %}
+<body>
+<form action="/myapp/edit_post/" method="post" enctype="multipart/form-data" name="form1" id="form1">
+    {% csrf_token %}
+  <table class="table table-bordered table-striped">
+    <tr>
+      <th>Product Name</th><input type="hidden" name="pid" value="{{ data.id }}">
+      <td><input type="text" name="textfield" id="textfield" class="form-control" value="{{ data.productname }}" /></td>
+    </tr>
+    <tr>
+      <th>Description</th>
+      <td><textarea name="textarea" id="textarea" class="form-control" >{{ data.description }}</textarea></td>
+    </tr>
+    <tr>
+      <th>Brand</th>
+      <td><input type="text" name="select" value="{{ data.BRAND }}" class="form-control">
+    </tr>
+    <tr>
+      <th>Price</th>
+      <td><input type="text" name="textfield2" class="form-control" id="textfield2" value="{{ data.price }}" /></td>
+    </tr>
+    <tr>
+      <th>Photo</th>
+      <td><img src="{{ data.photo }}" width="50px" height="100px">
+          <br><input type="file" name="fileField" class="form-control" id="fileField" /></td>
+    </tr>
+    <tr>
+      <td colspan="2"><div align="center">
+        <input type="submit" name="button" class="btn btn-primary" id="button" value="Update" />
+      </div></td>
+    </tr>
+  </table>
+</form>
+{% endblock %}

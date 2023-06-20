@@ -1,0 +1,29 @@
+{% extends 'home.html' %}
+{% block body %}
+<body>
+<form method="post" action="/myapp/cartpost/">
+    {% csrf_token %}
+<table class="table table-bordered">
+    <tr>
+        <th>Photo</th><td><img src="{{ data.photo }}" width="80px" height="100px"></td>
+    </tr>
+    <tr>
+        <input type="hidden" name="h1" value="{{ data.id }}">
+        <th>Product Name</th>
+        <td>{{ data.productname }}</td>
+    </tr>
+    <tr>
+        <th>Price</th>
+        <td>{{ data.price }}</td>
+    </tr>
+    <tr>
+        <th>Quantity</th>
+        <td><input type="number" name="q1" class="form-control" required ></td>
+    </tr>
+    <tr>
+       <td colspan="2"><input type="submit" name="s1" value="Add to Cart" class="btn btn-outline-success"></td>
+    </tr>
+</table>
+</form>
+</body>
+{% endblock %}

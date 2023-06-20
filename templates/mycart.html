@@ -1,0 +1,154 @@
+{% extends 'home.html' %}
+{% block body %}
+<body>
+<table class="table table-borderless table-hover" id="tb">
+{#    <tr>#}
+{#        <th>Product</th>#}
+{#        <th>Image</th>#}
+{#        <th>Price</th>#}
+{#        <th>Quantity</th>#}
+{#        <th>Total</th>#}
+{#        <th colspan="2"></th>#}
+{##}
+{#    </tr>#}
+{#    {% for i in data %}#}
+{#    <tr >#}
+{#    <tr> <td><img src="{{ i.PRODCUT.photo }}" width="80px" height="100px"></td>#}
+{#        <td style="color: black; font-weight: 200">{{ i.PRODCUT.productname }}<br>{{ i.PRODCUT.price }} Rs/-<br>{{ i.PRODCUT.BRAND }}<br>{{ i.quantity }}</td>#}
+{#        <td>{% widthratio i.quantity 1 i.PRODCUT.price %}</td>#}
+{#        <td><button id="plus" value="{{ i.id }}" name="p" class="btn btn-success">+</button>#}
+{#            <br><br><button id="mmmm" name="mmmm" value="{{ i.id }}" class="btn btn-danger">-</button></td>#}
+{#        <td><br><a href="/myapp/deletcart/{{ i.id }}" class="btn btn-outline-danger" onclick="return confirm('Are you Sure ?')"><i class="fa fa-trash" aria-hidden="true"></i></a> </td>#}
+{#    </tr>    #}
+{#    {% endfor %}#}
+{#<tr>#}
+{#    <th>Subtotal</th>#}
+{#    <td>{{ tot }}  RS/-</td>#}
+{#</tr>#}
+
+
+    <div class="row g-4 justify-content-center">
+
+    {% for i in data %}
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="course-item bg-light">
+                        <div class="position-relative overflow-hidden" style="margin-top: 10px; margin-bottom: 10px">
+                            <p></p>
+                            <div style="height: 200px"><img class="img-fluid" src="{{  i.PRODCUT.photo }}" alt=""></div>
+{#                            <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">#}
+{#                                <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">{{ i.BRAND }}</a>#}
+{#                                <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">{{ i.productname }}</a>#}
+{#                            </div>#}
+                        </div>
+                        <div class="text-center p-4 pb-0">
+                                                        <h5 class="mb-4">{{ i.PRODCUT.productname }}</h5>
+
+                            <h3 class="mb-0">Rs {{ i.PRODCUT.price }}</h3>
+
+                            <h5 class="mb-4">{{ i.PRODCUT.description }}</h5>
+                            <h5 class="mb-4">Qty : {{ i.quantity }}</h5>
+                        </div>
+                        <div class="d-flex border-top" align="center">
+{#                            <button id="plus" value="{{ i.id }}" name="p" class="btn btn-success">+</button>&nbsp;&nbsp;<button id="mmmm" name="mmmm" value="{{ i.id }}" class="btn btn-danger">-</button>#}
+                            <small class="flex-fill text-center border-end py-2"><button id="plus" value="{{ i.id }}" name="p" class="btn btn-outline-success"><i class="fa fa-plus" aria-hidden="true"></i></button></small>
+                            <small class="flex-fill text-center border-end py-2"><button id="mmmm" name="mmmm" value="{{ i.id }}" class="btn btn-outline-danger"><i class="fa fa-minus"></i> </button></small>
+                            <small class="flex-fill text-center py-2"><a href="/myapp/deletcart/{{ i.id }}" class="btn btn-outline-danger" onclick="return confirm('Are you Sure ?')"><i class="fa fa-trash" aria-hidden="true"></i></a></small>
+                        </div>
+
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
+    <br>
+
+    <div><h3><br>Sub Total : {{ tot }}</h3></div>
+
+</table>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script>
+     $(document).ready(function () {
+
+
+
+        $("#plus").click(function () {
+            ty=$("#plus").val();
+
+            $.ajax({
+                url:'/myapp/ajax_add_qty/',
+                type:'POST',
+                data:{'p':ty},
+                dataType:'json',
+                success:function (res) {
+                  if(res.status=="ok")
+                  {
+
+                  }
+                  else
+                  {
+                      alert("!!!!!!!!!!")
+                  }
+
+                },
+                error:function (res) {
+
+                }
+
+            });
+
+        });
+
+    });
+
+
+
+      $(document).ready(function () {
+
+        $("#mmmm").click(function () {
+            ty=$("#mmmm").val();
+
+            $.ajax({
+                url:'/myapp/ajax_sub_qty/',
+                type:'POST',
+                data:{'mmmm':ty},
+                dataType:'json',
+                success:function (res) {
+                  if(res.status=="ok")
+                  {
+
+                  }
+                  else
+                  {
+                      alert("!!!!!!!!!!")
+                  }
+
+                },
+                error:function (res) {
+
+                }
+
+            });
+
+        });
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,14 @@
+# service and backend
+
+python== 3.9
+Django==4.2.2
+sqlparse==0.4.4
+sqlite3
+
+# frontEnd
+
+html5
+Css(inline,External,Internal)
+Bootstrap5/6
+javascript
+jQuery

@@ -1,0 +1,192 @@
+{% extends 'home.html' %}
+{% block body %}
+    <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    </head>
+<body>
+
+<table class="table table-bordered" id="tb">
+{#    <tr>#}
+{#        <th>SL NO</th>#}
+{#        <th>Product</th>#}
+{#        <th>Image</th>#}
+{#        <th>Price</th>#}
+{#        <th>Quantity</th>#}
+{#        <th>Total</th>#}
+{#        <th colspan="2"></th>#}
+{#    </tr>#}
+{#    {% for i in data %}#}
+{#    <tr >#}
+{#        <td>{{ forloop.counter }}</td>#}
+{#        <td>{{ i.PRODCUT.productname }}</td>#}
+{#        <td><img src="{{ i.PRODCUT.photo }}" width="80px" height="100px"></td>#}
+{#        <td>{{ i.PRODCUT.price }}</td>#}
+{#        <td>{{ i.quantity }}</td>#}
+{#        <td>{% widthratio i.quantity 1 i.PRODCUT.price %}</td>#}
+{#        <td><button id="plus" value="{{ i.id }}" name="p" class="btn btn-success">+</button>#}
+{#            <br><br><button id="mmmm" name="mmmm" value="{{ i.id }}" class="btn btn-danger">-</button></td>#}
+{#    </tr>    #}
+{#    {% endfor %}#}
+{#<tr>#}
+{#    <th>Total Amount</th>#}
+{#    <td>{{ tot }}  RS/-</td>#}
+{#</tr>#}
+</table>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script>
+     $(document).ready(function () {
+
+
+
+        $("#plus").click(function () {
+            ty=$("#plus").val();
+
+            $.ajax({
+                url:'/myapp/ajax_add_qty/',
+                type:'POST',
+                data:{'p':ty},
+                dataType:'json',
+                success:function (res) {
+                  if(res.status=="ok")
+                  {
+
+                  }
+                  else
+                  {
+                      alert("!!!!!!!!!!")
+                  }
+
+                },
+                error:function (res) {
+
+                }
+
+            });
+
+        });
+
+    });
+
+
+
+      $(document).ready(function () {
+
+        $("#mmmm").click(function () {
+            ty=$("#mmmm").val();
+
+            $.ajax({
+                url:'/myapp/ajax_sub_qty/',
+                type:'POST',
+                data:{'mmmm':ty},
+                dataType:'json',
+                success:function (res) {
+                  if(res.status=="ok")
+                  {
+
+                  }
+                  else
+                  {
+                      alert("!!!!!!!!!!")
+                  }
+
+                },
+                error:function (res) {
+
+                }
+
+            });
+
+        });
+
+    });
+
+
+      $(document).ready(function () {
+
+
+
+
+            $.ajax({
+                url:'/myapp/viewcart_ajax/',
+                type:'GET',
+
+                dataType:'json',
+                success:function (res) {
+                  if(res.status=="ok")
+                  {
+
+
+                      $("#tb").append("<tr><th>SL NO</th><th>Product</th> <th>Image</th> <th>Price</th> <th>Quantity</th> <th>Total</th> <th colspan='2'></th></tr>")
+                  var data=res["data"];
+                      var tot=res["tot"];
+                      var len=data.length;
+				for(var i=0;i<len;i++) {
+                    var id = data[i]['id'];
+                    var producname = data[i]["producname"];
+                    var photo = data[i]['photo'];
+                    var price = data[i]['price'];
+                    var qty = data[i]['qty'];
+                    var total = data[i]['total'];
+                    var sl=parseInt(i)+1;
+
+
+{#                    $("#tb").append("<tr ><td>"+sl+"</td><td>"+producname+"</td><td><img src='"+photo+"' width='80px' height='100px'></td><td>"+price+"</td>  <td>"+qty+"</td> <td>"+total+"</td><td><a href='#' id='plus' value='"+id+"' name='p' class='btn btn-success'>Add  <br><br><button id='mmmm' name='mmmm' value='"+id+"' class='btn btn-danger'>Remove</button></td></tr>")#}
+                    $("#tb").append("<tr ><td>"+sl+"</td><td>"+producname+"</td><td><img src='"+photo+"' width='80px' height='100px'></td><td>"+price+"</td>  <td>"+qty+"</td> <td>"+total+"</td><td><button style='background:none; border:none; id='plus' value='"+id+"' name='p' ><i class='fas fa-plus'></i></button>  <br><br><button id='mmmm' name='mmmm' value='"+id+"' class='btn btn-danger'>Remove</button></td></tr>")
+
+
+
+
+
+
+
+                }
+
+                      $("#tb").append("<tr><th>Total Amount</th><td>"+tot+" RS/-</td></tr>")
+
+
+
+
+
+
+
+
+                  }
+                  else
+                  {
+                      alert("!!!!!!!!!!")
+                  }
+
+                },
+                error:function (res) {
+
+                }
+
+            });
+
+
+
+
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+{% endblock %}

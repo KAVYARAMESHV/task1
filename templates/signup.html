@@ -1,0 +1,118 @@
+
+<html lang="zxx">
+
+<head>
+    {% load static %}
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="keywords"
+        content="Flat lay login form Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+
+    <link href="//fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'login/css/style.css' %}" type="text/css" media="all" />
+
+    <script src="https://kit.fontawesome.com/af562a2a63.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <!-- form section start -->
+    <section class="w3l-workinghny-form">
+        <!-- /form -->
+        <div class="workinghny-form-grid">
+            <div class="wrapper">
+
+                <div class="workinghny-block-grid">
+                    <div class="form-right-inf">
+                        <div class="login-form-content">
+                            <h2>Sign Up Here</h2>
+                            <form action="/myapp/signup_post/" class="signin-form" method="post">
+{% csrf_token %}
+
+                                <div class="one-frm">
+                                    <input type="text" name="Name" placeholder="Name" required="" autofocus>
+                                </div>
+
+                                <div class="one-frm">
+                                    <input type="text" name="phone" placeholder="Phone" required="" autofocus>
+                                </div>
+
+                                <div class="one-frm">
+                                    <input type="email" name="Email" placeholder="Email" required="" autofocus>
+                                </div>
+
+                                <div class="one-frm">
+                                    <input type="password" name="Password" id="password" placeholder="Create a Password" required="">
+                                </div>
+                                <div class="one-frm">
+                                    <input type="password" name="Password2" id="repassword" placeholder="Confirm Password" required="">
+                                        <div id='password_result_invalid'></div>
+                                        <div id='password_confirmation_invalid'></div>
+                                </div>
+
+                                <button id='submit' class="btn btn-style mt-3" disabled>Sign Up</button>
+
+                                <p class="already">Already have an account? <a href="/myapp/login/">Login!</a></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       </section>
+</body>
+
+<script>
+    function validatePassword(password) {
+  return /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/.test(password);
+}
+
+const $password = document.getElementById("password");
+const $password_confirm = document.getElementById("repassword");
+const $submit = document.getElementById('submit');
+const $result_invalid_message = document.getElementById('password_result_invalid');
+const $confirmation_invalid_message = document.getElementById('password_confirmation_invalid');
+
+$password.addEventListener('input', () => validate_password());
+$password_confirm.addEventListener('input', () => validate_password());
+
+function validate_password() {
+  const password = $password.value;
+  const password_confirm = $password_confirm.value;
+  let match = false;
+  let complexity = false;
+
+  if (validatePassword(password)) {
+    complexity = true;
+  }
+
+  if (password === password_confirm) {
+    match = true;
+  }
+
+  if (complexity && match) {
+    $submit.disabled = false;
+  } else {
+    $submit.disabled = true;
+  }
+
+  if (!complexity) {
+    $result_invalid_message.innerText = "Password must be 8 characters with mix of upper, lower case, numeric and special character";
+    $result_invalid_message.style.display = "block";
+  } else {
+    $result_invalid_message.style.display = "none";
+  }
+
+  if (!match) {
+    $confirmation_invalid_message.innerHTML = "Passwords do not match.";
+    $confirmation_invalid_message.style.display = "block";
+  } else {
+    $confirmation_invalid_message.style.display = "none";
+  }
+}
+
+</script>
+
+</html>

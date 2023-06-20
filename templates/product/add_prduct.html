@@ -1,0 +1,43 @@
+{% extends 'launching.html' %}
+{% block body %}
+<body>
+<form action="/myapp/product_post/" method="post" enctype="multipart/form-data" name="form1" id="form1">
+    {% csrf_token %}
+  <table class="table table-bordered table-striped">
+    <tr>
+      <th>Product Name</th>
+      <td><input type="text" name="textfield" id="textfield" class="form-control" /></td>
+    </tr>
+    <tr>
+      <th>Description</th>
+      <td><textarea name="textarea" id="textarea" class="form-control" ></textarea></td>
+    </tr>
+    <tr>
+      <th>Brand</th>
+      <td><select name="select" id="select" class="form-control">
+          <option>Apple</option>
+          <option>Samsung</option>
+          <option>OnePlus</option>
+          <option>Vivo</option>
+          <option>Oppo</option>
+          <option>Redmi</option>
+          <option>Poco</option>
+          <option>Nokia</option>
+      </select></td>
+    </tr>
+    <tr>
+      <th>Price</th>
+      <td><input type="text" name="textfield2" class="form-control" id="textfield2" /></td>
+    </tr>
+    <tr>
+      <th>Photo</th>
+      <td><input type="file" name="fileField" class="form-control" id="fileField" /></td>
+    </tr>
+    <tr>
+      <td colspan="2"><div align="center">
+        <input type="submit" name="button" class="btn btn-primary" id="button" value="Add" />
+      </div></td>
+    </tr>
+  </table>
+</form>
+{% endblock %}

@@ -1,0 +1,50 @@
+
+<html lang="zxx">
+
+<head>
+    {% load static %}
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="keywords"
+        content="Flat lay login form Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+
+    <link href="//fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'login/css/style.css' %}" type="text/css" media="all" />
+
+    <script src="https://kit.fontawesome.com/af562a2a63.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <!-- form section start -->
+    <section class="w3l-workinghny-form">
+        <!-- /form -->
+        <div class="workinghny-form-grid">
+            <div class="wrapper">
+
+                <div class="workinghny-block-grid">
+                    <div class="form-right-inf">
+                        <div class="login-form-content">
+                            <h2>Login with email</h2>
+                            <form action="/myapp/login_post/" class="signin-form" method="post">
+                                {% csrf_token %}
+                                <div class="one-frm">
+                                    <input type="email" name="Email" placeholder="Email" required="" autofocus>
+                                </div>
+                                <div class="one-frm">
+                                    <input type="password" name="Password" placeholder="Password" required="">
+                                </div>
+                                <button class="btn btn-style mt-3">Login </button>
+                                <p class="already">Don't have an account? <a href="/myapp/signup/">Sign up</a></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       </section>
+</body>
+
+</html>
